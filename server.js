@@ -10,7 +10,7 @@ app.use('/public', express.static(__dirname + '/public'));
 app.use(methodOverride(`_method`));
 
 
-const cocktailController = require(`./controllers/cocktail_controller`);
+const cocktailController = require(`./controllers/cocktail_controller.js`);
 
 // Controllers
 app.use(`/cocktails`, cocktailController);

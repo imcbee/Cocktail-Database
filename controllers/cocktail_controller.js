@@ -3,19 +3,28 @@ const router = express.Router()
 
 // axios library for calling API's
 const axios = require('axios');
-const { response } = require('../server');
+
 
 // loads environment variables from a .env file
 require('dotenv').config();
+const API_KEY = process.env.API_KEY;
+
+console.log(API_KEY);
 
 router.get('/', function(req, res) {
-    axios.get('www.thecocktaildb.com/api/json')
+    const queryOptions = {
+        params: {
+            apikey: API_KEY,
+        }
+    }
+
+    axios.get('http://www.thecocktaildb.com/api/json', queryOptions)
     .then((response) => {
         const context = {drinkData: response.data}
         res.render('index.js', context)
     })
     .catch((err)=> {
-        console.log(err)
+        console.log(err.message)
     })
     
     //res.send('Working');   
